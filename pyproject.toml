@@ -4,7 +4,8 @@ version = "0.1.0"
 description = "A sample project for NumPy calculation with uv."
 requires-python = ">=3.11"
 dependencies = [
-  "numpy"
+  "numpy",
+  "scipy"
 ]
 
 [project.optional-dependencies]

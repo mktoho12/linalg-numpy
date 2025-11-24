@@ -27,5 +27,5 @@
     }
   },
   // Run commands after the container is created
-  "postCreateCommand": "uv venv && uv pip install .[dev]"
+  "postCreateCommand": "uv venv && uv pip install .[dev] && echo 'source /workspaces/linalg-numpy/.venv/bin/activate' >> ~/.bashrc"
 }
