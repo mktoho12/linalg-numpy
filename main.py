@@ -1,25 +1,36 @@
-import numpy as np
-from numpy.typing import NDArray
+import argparse
+from linalg_lib.vector_operations import demonstrate_vector_operations
+from linalg_lib.matrix_operations import demonstrate_matrix_operations
 
 
 def main() -> None:
     """
-    Creates a 2x2 matrix, calculates its inverse, and prints both.
+    Entry point to demonstrate linear algebra operations.
+    Parses command-line arguments to run specific demonstrations.
     """
-    # Create a 2x2 NumPy array (matrix)
-    matrix: NDArray[np.float64] = np.array([[1, 2], [3, 4]])
+    parser = argparse.ArgumentParser(
+        description="A CLI tool to demonstrate linear algebra operations with NumPy.",
+        epilog="Example: python main.py vector"
+    )
+    parser.add_argument(
+        "topic",
+        nargs="?",  # Make the argument optional
+        choices=["vector", "matrix", "all"],
+        default=None,  # Default to None if no argument is provided
+        help="Specify the topic to demonstrate. 'all' runs all topics."
+    )
 
-    print("Original Matrix:")
-    print(matrix)
-    print("-" * 20)
+    args = parser.parse_args()
 
-    try:
-        # Calculate the inverse of the matrix
-        inverse_matrix: NDArray[np.float64] = np.linalg.inv(matrix)
-        print("Inverse Matrix:")
-        print(inverse_matrix)
-    except np.linalg.LinAlgError as e:
-        print(f"Could not calculate the inverse matrix: {e}")
+    if args.topic is None:
+        parser.print_help()
+        return
+
+    if args.topic in ["vector", "all"]:
+        demonstrate_vector_operations()
+    
+    if args.topic in ["matrix", "all"]:
+        demonstrate_matrix_operations()
 
 
 if __name__ == "__main__":
