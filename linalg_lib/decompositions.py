@@ -52,3 +52,35 @@ def demonstrate_lu_decomposition():
     print("U行列")
     print(U)
 
+
+def demonstrate_qr_decomposition():
+    """
+    Demonstrates QR decomposition using NumPy.
+    Decomposes a matrix A into an orthogonal matrix Q and an upper triangular matrix R.
+    """
+    print("\n--- QR Decomposition ---")
+    A = np.array([[3,2],[4,1]])
+    print("Original Matrix A:")
+    print(A)
+    print()
+
+    # Perform QR decomposition
+    Q, R = np.linalg.qr(A)
+
+    print("Orthogonal Matrix Q:")
+    print(Q)
+    print()
+
+    print("Upper Triangular Matrix R:")
+    print(R)
+    print()
+
+    # Verification
+    print("Verification (Q @ R):")
+    reconstructed_A = Q @ R
+    print(reconstructed_A)
+    print()
+
+    is_close = np.allclose(A, reconstructed_A)
+    print(f"Is Q @ R approximately equal to A? {is_close}")
+    print("-" * 25)

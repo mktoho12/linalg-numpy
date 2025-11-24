@@ -1,6 +1,7 @@
 import argparse
 
-from linalg_lib.decompositions import demonstrate_lu_decomposition
+from linalg_lib.decompositions import (demonstrate_lu_decomposition,
+                                       demonstrate_qr_decomposition)
 from linalg_lib.matrix_operations import demonstrate_matrix_operations
 from linalg_lib.vector_operations import demonstrate_vector_operations
 
@@ -12,12 +13,12 @@ def main() -> None:
     """
     parser = argparse.ArgumentParser(
         description="A CLI tool to demonstrate linear algebra operations with NumPy.",
-        epilog="Example: python main.py lu"
+        epilog="Example: python main.py qr"
     )
     parser.add_argument(
         "topic",
         nargs="?",  # Make the argument optional
-        choices=["vector", "matrix", "lu", "all"],
+        choices=["vector", "matrix", "lu", "qr", "all"],
         default=None,  # Default to None if no argument is provided
         help="Specify the topic to demonstrate. 'all' runs all topics."
     )
@@ -41,6 +42,9 @@ def main() -> None:
         except ImportError:
             print("\nError: 'scipy' is not installed. Please run the command inside the dev container:")
             print("uv pip sync pyproject.toml")
+
+    if args.topic in ["qr", "all"]:
+        demonstrate_qr_decomposition()
 
 
 if __name__ == "__main__":
