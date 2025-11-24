@@ -1,0 +1,31 @@
+{
+  "name": "Modern Python with uv",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // Set the default Python interpreter to the one in the virtual environment
+        "python.defaultInterpreterPath": ".venv/bin/python",
+        // Enable format on save
+        "editor.formatOnSave": true,
+        // Set Ruff as the default formatter
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        // Enable linting with Ruff
+        "[python]": {
+          "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit"
+          }
+        }
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff"
+      ]
+    }
+  },
+  // Run commands after the container is created
+  "postCreateCommand": "uv venv && uv pip install .[dev]"
+}
